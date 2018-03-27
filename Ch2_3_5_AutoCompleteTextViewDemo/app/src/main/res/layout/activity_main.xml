@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="net.onest.ch2_3_5_autocompletetextviewdemo.MainActivity">
+
+    <AutoCompleteTextView
+        android:id="@+id/auto1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:completionHint="选择图书"
+        android:completionThreshold="2"/>
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/auto2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:completionHint="选择图书"
+        android:completionThreshold="1" />
+
+</LinearLayout>

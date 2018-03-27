@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TabHost组件id值不可变-->
+<!--id 需要引用 android的自带id-->
+<TabHost
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <!-- TabWidget组件id值不可变-->
+        <!--TabWidget代表选项卡按钮，与FramLayout构成Tabhost的两个必备组件-->
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+        </TabWidget>
+
+        <!-- FrameLayout布局，id值不可变-->
+        <!--Fragement组件代表页面-->
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@android:id/tabs">
+
+            <!-- 第一个tab的布局 -->
+            <LinearLayout
+                android:id="@+id/tab1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="第一个tab的布局"
+                    android:textSize="34dp"/>
+            </LinearLayout>
+
+            <!-- 第二个tab的布局 -->
+            <LinearLayout
+                android:id="@+id/tab2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="第二个tab的布局"
+                    android:textSize="34dp" />
+            </LinearLayout>
+
+            <!-- 第三个tab的布局 -->
+            <LinearLayout
+                android:id="@+id/tab3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="第三个tab的布局"
+                    android:textSize="34dp" />
+            </LinearLayout>
+
+        </FrameLayout>
+    </RelativeLayout>
+</TabHost>
