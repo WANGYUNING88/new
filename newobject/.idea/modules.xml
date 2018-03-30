@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/animation/animation.iml" filepath="$PROJECT_DIR$/animation/animation.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/document/document.iml" filepath="$PROJECT_DIR$/document/document.iml" />
+      <module fileurl="file://$PROJECT_DIR$/documentstorage/documentstorage.iml" filepath="$PROJECT_DIR$/documentstorage/documentstorage.iml" />
       <module fileurl="file://$PROJECT_DIR$/img/img.iml" filepath="$PROJECT_DIR$/img/img.iml" />
       <module fileurl="file://$PROJECT_DIR$/newobject.iml" filepath="$PROJECT_DIR$/newobject.iml" />
     </modules>
