@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                         = db.rawQuery("SELECT * FROM COMPANY", null);
 
                //<=> Cursor cursor = db.query ("COMPANY",null,null,null,null,null,null);
-// 判断游标是否为空
+                // 判断游标是否为空
                 if(cursor.moveToFirst()) {
                     // 遍历游标
                     do {
