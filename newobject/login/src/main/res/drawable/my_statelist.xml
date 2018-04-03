@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <layer-list>
+            <item>
+                <color android:color="#ABABEE"/>
+            </item>
+            <item
+                android:drawable="@android:color/white"
+                android:bottom="50dp"/>
+        </layer-list>
+    </item>
+    <item>
+        <layer-list>
+            <item>
+                <color android:color="#ABABEE"/>
+            </item>
+            <item
+                android:drawable="@android:color/white"
+                android:bottom="3dp"/>
+        </layer-list>
+    </item>
+</selector>
