@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="50dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_marginLeft="15dp"
+        android:id="@+id/detail_head"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <ImageView
+            android:adjustViewBounds="true"
+            android:id="@+id/contact_img"
+            android:src="@drawable/contact"
+            android:layout_width="60dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:id="@+id/contact_name"
+            android:layout_marginLeft="80dp"
+            android:text="张三"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <ScrollView
+        android:id="@+id/detail_context"
+        android:layout_marginTop="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="320dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/detail_tel"
+                android:layout_marginLeft="30dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="90dp">
+                <TextView
+                    android:textStyle="bold"
+                    android:gravity="bottom"
+                    android:textSize="20dp"
+                    android:text="10000000000"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+                <TextView
+                    android:layout_weight="1"
+                    android:text="telephone code"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_below="@+id/detail_tel"
+                android:layout_marginLeft="30dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="90dp">
+                <TextView
+                    android:textStyle="bold"
+                    android:gravity="bottom"
+                    android:textSize="20dp"
+                    android:text="10000000000@qq.com"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+                <TextView
+                    android:layout_weight="1"
+                    android:text="email"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+    <Button
+        android:layout_below="@+id/detail_context"
+        android:textColor="#FF0000"
+        android:text="修改"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

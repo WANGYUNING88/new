@@ -1,1 +1,1 @@
-include ':app', ':img', ':animation', ':document', ':myapplication', ':sqlite'
+include ':app', ':img', ':animation', ':document', ':myapplication', ':sqlite', ':addressbook'
