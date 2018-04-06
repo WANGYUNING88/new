@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                                 String tel = cursor1.getString(cursor1.getColumnIndex(
                                         ContactsContract.CommonDataKinds.Phone.NUMBER));
                                 Log.e("通讯录","name:"+name+" | "+"id:"+id+"|"+"tel:"+tel);
-                            }while (cursor1.moveToFirst());
+                            }while (cursor1.moveToNext());
                         }
 
                     }while (cursor.moveToFirst());

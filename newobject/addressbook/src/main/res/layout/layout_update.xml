@@ -14,7 +14,7 @@
             android:src="@drawable/contact"
             android:layout_width="60dp"
             android:layout_height="match_parent" />
-        <TextView
+        <EditText
             android:textStyle="bold"
             android:textSize="20dp"
             android:gravity="center"
@@ -30,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
@@ -39,15 +40,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </LinearLayout>
+
             <LinearLayout
-                android:id="@+id/detail_email"
                 android:layout_below="@+id/detail_tel"
+                android:id="@+id/detail_email"
                 android:layout_marginLeft="30dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </LinearLayout>
-
         </RelativeLayout>
     </ScrollView>
     <RelativeLayout
@@ -55,13 +56,31 @@
         android:layout_below="@+id/detail_context"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <Button
-            android:gravity="bottom|center"
             android:id="@+id/detail_update"
-            android:textColor="#FF0000"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="56dp"
+            android:layout_marginStart="56dp"
             android:text="修改"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textColor="#FF0000" />
+
+        <Button
+            android:id="@+id/detail_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="53dp"
+            android:layout_marginRight="53dp"
+            android:text="取消"
+            android:textColor="#999999" />
     </RelativeLayout>
 
 </RelativeLayout>

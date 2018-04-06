@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_below="@+id/detail_tel"
+    android:layout_marginLeft="30dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:id="@+id/contact_tel"
+        android:textStyle="bold"
+        android:gravity="bottom"
+        android:textSize="20dp"
+        android:text="10000000000@qq.com"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+    <TextView
+        android:layout_weight="1"
+        android:text="phone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+</LinearLayout>
