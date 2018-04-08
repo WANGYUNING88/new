@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <Button
+        android:id="@+id/btn_Service1"
+        android:text="启动一般服务"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_Service2"
+        android:text="关闭一般服务"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <!--<Button-->
+        <!--android:text="创建BindService"-->
+        <!--android:id="@+id/btn_bindService4"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+    <Button
+        android:text="启动绑定服务"
+        android:id="@+id/btn_bindService1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="解绑服务"
+        android:id="@+id/btn_bindService2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="销毁服务"
+        android:id="@+id/btn_bindService3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
