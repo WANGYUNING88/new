@@ -18,6 +18,7 @@
         </activity>
         <service android:name=".FirstService" />
         <service android:name=".BindService"/>
+        <service android:name=".MyIntentService"/>
     </application>
 
 </manifest>
