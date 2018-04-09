@@ -6,11 +6,11 @@
     android:layout_height="90dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView
+        android:text="2222"
         android:id="@+id/contact_email"
         android:textStyle="bold"
         android:gravity="bottom"
         android:textSize="20dp"
-        android:text="10000000000@qq.com"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp" />

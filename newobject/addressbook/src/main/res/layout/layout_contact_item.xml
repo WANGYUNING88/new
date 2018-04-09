@@ -23,16 +23,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
 
-        <ImageView
-            android:id="@+id/contact_delete"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="23dp"
-            android:layout_marginRight="23dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/delete" />
+
     </RelativeLayout>
 </LinearLayout>

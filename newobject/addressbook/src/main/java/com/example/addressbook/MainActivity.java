@@ -30,9 +30,11 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+    private Map<String,Object> mapTel;
+    private Map<String,Object> mapEmail;
     private Map<String,Object> map ;
-    private List<String> telList;
-    private List<String> emailList;
+    private List<Map<String,Object>> telList;
+    private List<Map<String,Object>> emailList;
     private ContactAdapter contactAdapter;
     private ViewFlipper allFlipper;
     private Handler handler = new Handler(){
@@ -95,25 +97,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView,
+        public View getView(final int position, View convertView,
                             ViewGroup parent) {
             if(null == convertView) {
                 convertView = LayoutInflater.from(context)
                         .inflate(item_layout_id, null);
             }
             //获取view
-            ImageView contact_delete = convertView.findViewById(R.id.contact_delete);
-            contact_delete.setOnClickListener(
-                    new EditButtonListener(dataSource.get(position),
-                            position));
+//            ImageView contact_delete = convertView.findViewById(R.id.contact_delete);
+//            contact_delete.setOnClickListener(
+//                    new EditButtonListener(dataSource.get(position),
+//                            position));
             ImageView contact_img = convertView.findViewById(R.id.contact_img);
             TextView contact_name = convertView.findViewById(R.id.contact_name);
 
             Map<String, Object> itemData = dataSource.get(position);
             contact_img.setImageResource((Integer) itemData.get("contact_img"));
-            contact_delete.setImageResource((Integer) itemData.get("contact_delete"));
+//            contact_delete.setImageResource((Integer) itemData.get("contact_delete"));
             contact_name.setText(itemData.get("contact_name").toString());
-
             return convertView;
         }
     }
@@ -195,34 +196,48 @@ public class MainActivity extends AppCompatActivity {
                 map.put("contact_name",contact_name);
                 //id
                 int indexId = cursor.getColumnIndex(ContactsContract.Contacts._ID);
+
                 int contact_id = cursor.getInt(indexId);
+
                 map.put("contact_id",contact_id);
 //                根据id获得tel
                 Cursor cursor1 = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                         null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID
-                                +"="+ContactsContract.Contacts._ID,null,
+                                +"="+contact_id,null,
                         null);
+
                 if (cursor1.moveToFirst()){
+                    telList = new ArrayList<>();
                     do {
-                        telList = new ArrayList<>();
+                        mapTel = new HashMap<>();
+                        int id = cursor1.getInt(cursor1.getColumnIndex(
+                                 ContactsContract.CommonDataKinds.Phone._ID));
+                        mapTel.put("id",id);
                         String tel = cursor1.getString(cursor1.getColumnIndex(
                                 ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        telList.add(tel);
+                        mapTel.put("tel",tel);
+                        telList.add(mapTel);
                     }while (cursor1.moveToNext());
                 }
                 map.put("contact_tel",telList);
-                //根据id获得tel
+                //根据id获得email
                 Cursor cursor2 = contentResolver.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI,
                         null,ContactsContract.CommonDataKinds.Email.CONTACT_ID
-                                +"="+ContactsContract.Contacts._ID,null,
+                                +"="+contact_id,null,
                         null);
+
                 if (cursor2.moveToFirst()){
+                    emailList = new ArrayList<>();
                     do {
-                        telList = new ArrayList<>();
-                        String email = cursor1.getString(cursor1.getColumnIndex(
+                        mapEmail = new HashMap<>();
+                        int id = cursor2.getInt(cursor2.getColumnIndex(
+                                ContactsContract.CommonDataKinds.Email._ID));
+                        mapEmail.put("id",id);
+                        String email = cursor2.getString(cursor2.getColumnIndex(
                                 ContactsContract.CommonDataKinds.Email.DATA));
-                        telList.add(email);
-                    }while (cursor1.moveToNext());
+                        mapEmail.put("email",email);
+                        emailList.add(mapEmail);
+                    }while (cursor2.moveToNext());
                 }
                 map.put("contact_email",emailList);
                 dataSource.add(map);
@@ -247,6 +262,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
     }
 }

@@ -23,7 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ContactActivity"/>
-        <activity android:name=".UpdateActivity"/>
+        <activity android:name=".UpdateActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
     </application>
 
 </manifest>
