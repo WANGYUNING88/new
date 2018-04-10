@@ -44,7 +44,7 @@ public class UpdateActivity extends Activity {
         final TextView textView = findViewById(R.id.contact_name);
         textView.setText((String)contactMap.get("contact_name"));
         List<Map<String,Object>> telList = (List<Map<String,Object>>) contactMap.get("contact_tel");
-        List<Map<String,Object>> emailList = (List<Map<String,Object>>) contactMap.get("contact_email");
+        final List<Map<String,Object>> emailList = (List<Map<String,Object>>) contactMap.get("contact_email");
         final LinearLayout linearLayoutTel = findViewById(R.id.detail_tel);
         if (telList != null) {
 
@@ -91,6 +91,10 @@ public class UpdateActivity extends Activity {
                    mapTel.put("id",id);
                    telListUpdate.add(mapTel);
                }
+               emailListUpdate = new ArrayList<>();
+               for (int i = 0 ; i < linearLayoutEamil.getChildCount() ; i++){
+
+               }
                 try {
                     updateContact();
                 } catch (Exception e) {
@@ -113,6 +117,17 @@ public class UpdateActivity extends Activity {
             contentResolver.update(uri,
                     ct,
                     ContactsContract.CommonDataKinds.Phone._ID+"=?",
+                    new String[]{id+""} );
+
+        }
+        for (Map<String,Object> emailMap : emailListUpdate) {
+            int id = (int) emailMap.get("id");
+            Log.e("id", String.valueOf(id));
+            ContentValues ct = new ContentValues();
+            ct.put("data1",emailMap.get("email").toString() );
+            contentResolver.update(uri,
+                    ct,
+                    ContactsContract.CommonDataKinds.Email._ID+"=?",
                     new String[]{id+""} );
 
         }
