@@ -23,6 +23,44 @@ import java.util.Map;
 
 public class ContactActivity extends Activity {
     private HashMap<String,Object> contactMap;
+
+    @Override
+    protected void onActivityResult(int requestCode,
+                                    int resultCode,
+                                    Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            String name = data.getStringExtra("contact_name");
+            TextView textView = findViewById(R.id.contact_name);
+            textView.setText(name);
+            contactMap.put("contact_name",name);
+            List<Map<String,Object>> telList = (List<Map<String,Object>>) data.getSerializableExtra("telListUpdate");
+            List<Map<String,Object>> emailList = (List<Map<String,Object>>) data.getSerializableExtra("emailListUpdate");
+            contactMap.put("contact_tel",telList);
+            contactMap.put("contact_email",emailList);
+            LinearLayout linearLayoutMsg = findViewById(R.id.detail_msg);
+
+            linearLayoutMsg.removeAllViews();
+
+            if (telList != null) {
+                for (Map<String,Object> telMap : telList) {
+                    View telView = View.inflate(linearLayoutMsg.getContext(), R.layout.layout_tel_item, null);
+                    TextView textView1 = telView.findViewById(R.id.contact_tel);
+                    textView1.setText(telMap.get("tel").toString());
+                    linearLayoutMsg.addView(telView);
+                }
+            }
+            if (emailList != null) {
+                for (Map<String,Object> emailMap : emailList) {
+                    View emailView = View.inflate(linearLayoutMsg.getContext(), R.layout.layout_email_item, null);
+                    TextView textView2 = emailView.findViewById(R.id.contact_email);
+                    textView2.setText(emailMap.get("email").toString());
+                    linearLayoutMsg.addView(emailView);
+                }
+            }
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +98,8 @@ public class ContactActivity extends Activity {
                 Intent intent = new Intent();
                 intent.setClass(ContactActivity.this,UpdateActivity.class);
                 intent.putExtra("contact_map",contactMap);
-//              startActivityForResult(intent, 0);
-                startActivity(intent);
+                startActivityForResult(intent,0);
+//                startActivity(intent);
             }
         });
         Button button1 =findViewById(R.id.detail_delete);
@@ -77,8 +115,9 @@ public class ContactActivity extends Activity {
                 contentResolver.delete(ContactsContract.RawContacts.CONTENT_URI,
                         ContactsContract.RawContacts.CONTACT_ID + " =?",
                         new String[]{id+""});
-                Intent intent1 = new Intent(ContactActivity.this,MainActivity.class);
-                startActivity(intent1);
+                Intent intent1 = new Intent();
+                setResult(RESULT_OK,intent1);
+                finish();
 
             }
         });

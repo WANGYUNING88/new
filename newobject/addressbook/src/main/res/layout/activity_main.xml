@@ -46,32 +46,32 @@
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp" />
     </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/homeLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView"
-            android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/textView">
+    <RelativeLayout
 
-            <EditText
-                android:textSize="15dp"
-                android:drawableLeft="@drawable/find1"
-                android:id="@+id/et"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:background="@drawable/sharpen"
-                android:gravity="center"
-                android:hint="搜索联系人"/>
-            <ListView
-                android:layout_below="@+id/et"
-                android:id="@+id/lv_contact"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        android:id="@+id/homeLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textView">
 
-            </ListView>
-        </RelativeLayout>
-    <!-- 主界面 -->
+        <EditText
+            android:textSize="15dp"
+            android:drawableLeft="@drawable/find1"
+            android:id="@+id/et"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/sharpen"
+            android:gravity="center"
+            android:hint="搜索联系人"/>
+        <ListView
+            android:layout_below="@+id/et"
+            android:id="@+id/lv_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+    </RelativeLayout>
 
 </ViewFlipper>

@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -50,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         }
     };
     private  TextView textViewStart;
-
     private CountDownTimer timer = new CountDownTimer(6000, 1000) {
 
 
@@ -103,11 +103,6 @@ public class MainActivity extends AppCompatActivity {
                 convertView = LayoutInflater.from(context)
                         .inflate(item_layout_id, null);
             }
-            //获取view
-//            ImageView contact_delete = convertView.findViewById(R.id.contact_delete);
-//            contact_delete.setOnClickListener(
-//                    new EditButtonListener(dataSource.get(position),
-//                            position));
             ImageView contact_img = convertView.findViewById(R.id.contact_img);
             TextView contact_name = convertView.findViewById(R.id.contact_name);
 
@@ -118,28 +113,6 @@ public class MainActivity extends AppCompatActivity {
             return convertView;
         }
     }
-
-    private class EditButtonListener implements View.OnClickListener {
-        private Map<String, Object> map;
-        private int position;
-
-        public EditButtonListener(Map<String, Object> map,
-                                  int position) {
-            this.map = map;
-            this.position = position;
-        }
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent();
-//            intent.setClass(MainActivity.this,
-//                    AbstractActivity.class);
-//            intent.putExtra("name", map.get("name").toString());
-//            intent.putExtra("abstract", map.get("abstract").toString());
-//            intent.putExtra("position", position);
-//            startActivityForResult(intent, 0);
-        }
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,8 +152,25 @@ public class MainActivity extends AppCompatActivity {
                 handler.sendEmptyMessage(1); //给UI主线程发送消息
             }
         },6000);
-
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getData(); //给UI主线程发送消息
+            }
+        },0000);
         //生成数据
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode,
+                                    int resultCode,
+                                    Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            getData();
+        }
+    }
+    public void getData(){
         final List<Map<String, Object>> dataSource = new ArrayList<>();
         ContentResolver contentResolver = getContentResolver();
         Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,null,
@@ -205,13 +195,12 @@ public class MainActivity extends AppCompatActivity {
                         null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID
                                 +"="+contact_id,null,
                         null);
-
+                telList = new ArrayList<>();
                 if (cursor1.moveToFirst()){
-                    telList = new ArrayList<>();
                     do {
                         mapTel = new HashMap<>();
                         int id = cursor1.getInt(cursor1.getColumnIndex(
-                                 ContactsContract.CommonDataKinds.Phone._ID));
+                                ContactsContract.CommonDataKinds.Phone._ID));
                         mapTel.put("id",id);
                         String tel = cursor1.getString(cursor1.getColumnIndex(
                                 ContactsContract.CommonDataKinds.Phone.NUMBER));
@@ -225,9 +214,9 @@ public class MainActivity extends AppCompatActivity {
                         null,ContactsContract.CommonDataKinds.Email.CONTACT_ID
                                 +"="+contact_id,null,
                         null);
-
+                emailList = new ArrayList<>();
                 if (cursor2.moveToFirst()){
-                    emailList = new ArrayList<>();
+
                     do {
                         mapEmail = new HashMap<>();
                         int id = cursor2.getInt(cursor2.getColumnIndex(
@@ -258,11 +247,8 @@ public class MainActivity extends AppCompatActivity {
                         ContactActivity.class);
                 intent.putExtra("position", position);
                 intent.putExtra("contact_map", (Serializable) dataSource.get(position));
-//              startActivityForResult(intent, 0);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
             }
         });
-
-
     }
 }
