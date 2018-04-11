@@ -13,4 +13,9 @@
         android:text="SAX解析xml"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_pull"
+        android:text="PULL解析xml"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

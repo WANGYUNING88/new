@@ -61,5 +61,20 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        Button button2 = findViewById(R.id.btn_pull);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    InputStream  inputStream =
+                            assetManager.open("student.xml");
+                    List<Student> studentList =
+                           StudentPullService.getStudentFromXML(inputStream);
+                    printStudent(studentList);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
