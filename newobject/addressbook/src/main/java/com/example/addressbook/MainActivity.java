@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
     private  TextView textViewStart;
-    private CountDownTimer timer = new CountDownTimer(6000, 1000) {
+    private CountDownTimer timer = new CountDownTimer(10000, 1000) {
 
 
         @Override
@@ -151,13 +151,13 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 handler.sendEmptyMessage(1); //给UI主线程发送消息
             }
-        },6000);
+        },10000);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 getData(); //给UI主线程发送消息
             }
-        },0000);
+        },2000);
         //生成数据
 
     }

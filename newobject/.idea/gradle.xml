@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/04-11" />
             <option value="$PROJECT_DIR$/addressbook" />
             <option value="$PROJECT_DIR$/animation" />
             <option value="$PROJECT_DIR$/app" />
