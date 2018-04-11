@@ -4,8 +4,13 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <Button
-        android:id="@+id/btn_student"
+        android:id="@+id/btn_dom"
         android:text="DOM解析xml"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_sax"
+        android:text="SAX解析xml"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

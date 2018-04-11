@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         assetManager = getAssets();
-        Button button = findViewById(R.id.btn_student);
+        Button button = findViewById(R.id.btn_dom);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +43,22 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+        });
+        Button button1 = findViewById(R.id.btn_sax);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    InputStream  inputStream =
+                            assetManager.open("student.xml");
+                    List<Student> studentList =
+                            StudentSAXService.getStudentFromXML(inputStream);
+                    printStudent(studentList);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         });
     }
