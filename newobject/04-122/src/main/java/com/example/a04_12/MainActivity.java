@@ -71,11 +71,12 @@ public class MainActivity extends AppCompatActivity {
                     if (isChecked) {
                         textView.setText("音乐暂停...");
                         mediaPlayer.pause();
-                    } else {
+                    }
+                }else if (!isChecked) {
                         textView.setText("音乐播放...");
                         mediaPlayer.start();
-                    }
-                }else {
+
+                }else  {
                     textView.setText("音乐未播放...");
                 }
             }
