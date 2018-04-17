@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/json" />
             <option value="$PROJECT_DIR$/myapplication" />
             <option value="$PROJECT_DIR$/service" />
+            <option value="$PROJECT_DIR$/socket" />
             <option value="$PROJECT_DIR$/sqlite" />
           </set>
         </option>
