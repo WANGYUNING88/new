@@ -1,7 +1,9 @@
 package com.example.wang.baidumap;
 
 
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -21,6 +27,8 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MyLocationConfiguration;
+import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.PolygonOptions;
 import com.baidu.mapapi.map.PolylineOptions;
@@ -36,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private MapView aMapView = null;
     private BaiduMap baiduMap;
     private UiSettings uiSettings;
+    private LocationClient mLocationClient = null;
+    private boolean firstLocation = true ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,17 +63,70 @@ public class MainActivity extends AppCompatActivity {
         baiduMap = aMapView.getMap();
 
         //设置比例尺
-        MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.zoomTo((float) 15.0);
+        MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.zoomTo((float) 19.0);
         baiduMap.setMapStatus(mapStatusUpdate);
 
         //设置手势操作
         uiSettings = baiduMap.getUiSettings();
 
+        //定位
+        createLocation();
+
+
+
+    }
+    //定位
+    public void createLocation(){
+        mLocationClient =
+                new LocationClient(getApplicationContext());
+        LocationClientOption option
+                = new LocationClientOption();
+        option.setOpenGps(true);
+        option.setCoorType("bd09ll");
+        option.setScanSpan(3000);
+        option.setIsNeedAddress(true);
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
+        mLocationClient.setLocOption(option);
+
+        MyLocationListener myLocationListener
+                = new MyLocationListener();
+        mLocationClient.registerLocationListener(myLocationListener);
+        mLocationClient.start();
 
 
 
 
     }
+    private class MyLocationListener extends BDAbstractLocationListener {
+        // 异步返回的定位结果
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            // 处理定位信息
+            Log.e("位置:", "纬度:"+String.valueOf(location.getLatitude())+" | "+
+            "经度:"+ String.valueOf(location.getLongitude())+" | "+"详细信息:"+location.getAddrStr());
+
+            LatLng l = new LatLng(location.getLatitude(),location.getLongitude());
+            //判断第一次定位成功
+            if(firstLocation){
+                MapStatusUpdate mapStatusUpdate =
+                        MapStatusUpdateFactory.newLatLng(l);
+                baiduMap.animateMapStatus(mapStatusUpdate);
+//                firstLocation = false;
+                baiduMap.setMyLocationConfiguration(new MyLocationConfiguration( MyLocationConfiguration.LocationMode.FOLLOWING,
+                        true,
+                        BitmapDescriptorFactory.fromResource(R.drawable.location)));
+                baiduMap.setMyLocationEnabled(true);
+                MyLocationData locData = new MyLocationData.Builder()
+                        .accuracy(location.getRadius())    // 精度
+                        .direction(location.getDirection())// 方向
+                        .latitude(location.getLatitude())  // 纬度
+                        .longitude(location.getLongitude())// 经度
+                        .build();  // 构建生成定位数据对象
+                baiduMap.setMyLocationData(locData);
+            }
+        }
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
