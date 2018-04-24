@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,12 +16,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Serialization
-        Gson gson = new Gson();
+        //Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .serializeNulls()
+                .setPrettyPrinting()
+                .setDateFormat("yyyy-MM-dd")
+                .create();
         gson.toJson(1);            // ==> 1
         gson.toJson("abcd");       // ==> "abcd"
-         gson.toJson(new Long(10)); // ==> 10
-         int[] values = { 1 };
-         gson.toJson(values);       // ==> [1]
+        gson.toJson(new Long(10)); // ==> 10
+        int[] values = {1};
+        gson.toJson(values);       // ==> [1]
         // Deserialization
         int num1 = gson.fromJson("1", int.class);
         Integer num2 = gson.fromJson("1", Integer.class);
@@ -37,5 +43,20 @@ public class MainActivity extends AppCompatActivity {
         // json is ：{"name":"张三","age":20,"sex":"男"}
 
 
+        // POJO Deserialization
+         String jsonString ="{\"name\":\"lily\",\"age\":24,\"sex\":\"男\"}";
+         User user1 = gson.fromJson(jsonString, User.class);
+
+        Log.e("name", user1.getName());
+        Log.e("age", String.valueOf(user1.getAge()));
+        Log.e("sex", user1.getSex());
+
+
+    }
+    private String myToGson(Object object){
+        return null;
+    }
+    private Object myFromDson(String str , Class cl){
+        return null;
     }
 }
