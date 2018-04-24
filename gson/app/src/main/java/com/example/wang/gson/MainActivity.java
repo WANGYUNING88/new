@@ -1,14 +1,18 @@
 package com.example.wang.gson;
 
+import android.support.v4.widget.ListViewAutoScrollHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
+import java.util.Collection;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         Log.e("gson", jsonObj);
         // json is ：{"name":"张三","age":20,"sex":"男"}
 
+        //嵌套类型
+        Person p = new Person("wang",user);
+        String json = gson.toJson(p);
+        Log.e("preson",json);
 
         // POJO Deserialization
          String jsonString ="{\"name\":\"lily\",\"age\":24,\"sex\":\"男\"}";
@@ -57,6 +65,30 @@ public class MainActivity extends AppCompatActivity {
         Student student = new Student("0001","李四");
         String j = myToJson(student);
         Log.e("student",j);
+
+        //数组的序列化和反序列化
+        int[] ints = {1, 2, 3, 4, 5};
+        String[] strings = {"abc", "def", "ghi"};
+                // Serialization
+        gson.toJson(ints);     // ==> [1,2,3,4,5]
+        gson.toJson(strings);  // ==> ["abc", "def", "ghi"]
+
+        // Deserialization
+        int[] ints2 = gson.fromJson("[1,2,3,4,5]", int[].class);
+        // ==> ints2 will be same as ints
+
+
+        //集合的序列化和反序列化
+        Collection<Integer> ints1 =
+                Lists.immutableList(1,2,3,4,5);
+
+        // Serialization
+        String json1 = gson.toJson(ints);  // ==> json is [1,2,3,4,5]
+
+        // Deserialization
+        Type collectionType = new TypeToken<Collection<Integer>>(){}.getType();
+        Collection<Integer> integer = gson.fromJson(json1, collectionType);
+
 
     }
 
