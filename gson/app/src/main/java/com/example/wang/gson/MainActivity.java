@@ -9,10 +9,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.util.Collection;
+import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
         String j = myToJson(student);
         Log.e("student",j);
 
+//        String stuJson = "{\"studentNum\":\"002\",\"studentName\":\"王五\"}";
+        Student student1 = (Student) myFromJson(j,Student.class);
+        Log.e("stunum",student1.getStudentNum());
+        Log.e("stuname",student1.getStudentName());
+
         //数组的序列化和反序列化
         int[] ints = {1, 2, 3, 4, 5};
         String[] strings = {"abc", "def", "ghi"};
@@ -79,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //集合的序列化和反序列化
-        Collection<Integer> ints1 =
-                Lists.immutableList(1,2,3,4,5);
+//        Collection<Integer> ints1 =
+//                Lists.immutableList(1,2,3,4,5);
 
         // Serialization
         String json1 = gson.toJson(ints);  // ==> json is [1,2,3,4,5]
@@ -118,7 +129,38 @@ public class MainActivity extends AppCompatActivity {
         return String.valueOf(stringBuffer);
     }
     //实现fromJson
-    private Object myFromJson(String str , Class cl){
-        return null;
+    private Object myFromJson(String str , Class cla){
+        Object object = null;
+        try {
+            //利用反射调用构造器
+            Constructor[] cons = cla.getDeclaredConstructors();
+            object = cons[0].newInstance();
+
+            //得到Json串中key的名字
+            JSONObject jsonObject = new JSONObject(str);
+            Iterator<String> keys = jsonObject.keys();
+
+            //得到对象中所有属性的名字
+            Field[] fields = cla.getDeclaredFields();
+
+            while (keys.hasNext()){
+                String fieldName = keys.next();
+                for (Field f : fields){
+                    f.setAccessible(true);
+                    if (f.getName().equals(fieldName)){
+                        f.set(object, jsonObject.get(fieldName));
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return object;
     }
 }
