@@ -7,6 +7,9 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.File;
+import java.lang.reflect.Field;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -51,12 +54,39 @@ public class MainActivity extends AppCompatActivity {
         Log.e("age", String.valueOf(user1.getAge()));
         Log.e("sex", user1.getSex());
 
+        Student student = new Student("0001","李四");
+        String j = myToJson(student);
+        Log.e("student",j);
 
     }
-    private String myToGson(Object object){
-        return null;
+
+    //实现toJson
+    private String myToJson(Object object){
+        Class cla = object.getClass();
+        Field[] field = cla.getDeclaredFields();
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("{");
+        stringBuffer.append("\n");
+        for (Field f : field){
+            f.setAccessible(true);
+            String fieldName = f.getName();
+            try {
+                Object fieldValue = f.get(object);
+                stringBuffer.append("\""+fieldName+"\": "+fieldValue+" ,");
+                stringBuffer.append("\n");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        stringBuffer.deleteCharAt(stringBuffer.length()-3);
+        stringBuffer.deleteCharAt(stringBuffer.length()-2);
+        stringBuffer.deleteCharAt(stringBuffer.length()-1);
+        stringBuffer.append("\n");
+        stringBuffer.append("}");
+        return String.valueOf(stringBuffer);
     }
-    private Object myFromDson(String str , Class cl){
+    //实现fromJson
+    private Object myFromJson(String str , Class cl){
         return null;
     }
 }
