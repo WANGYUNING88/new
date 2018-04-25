@@ -7,8 +7,9 @@ package com.example.wang.gson;
 public class User {
 
     private String name;
-    private String sex;
     private int age;
+    private String sex;
+
 
     User(String aName,int aAge,String aSex){
         name = aName;
