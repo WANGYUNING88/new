@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.onest.okhttpdemo.MainActivity"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_getsync"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="get请求(同步)"/>
+
+    <Button
+        android:id="@+id/btn_getasync"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="get请求(异步)"/>
+    <Button
+        android:id="@+id/btn_poststring"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="post请求(普通文本)"/>
+
+    <Button
+        android:id="@+id/btn_postform"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="post请求（表单数据）"/>
+
+    <Button
+        android:id="@+id/btn_postfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="上传文件"/>
+
+    <Button
+        android:id="@+id/btn_downloadfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="下载文件"/>
+</LinearLayout>
